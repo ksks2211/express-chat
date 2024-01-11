@@ -1,4 +1,5 @@
 import mongoose, { Error } from "mongoose";
+import logger from "../logger";
 
 const {
   NODE_ENV,
@@ -9,10 +10,9 @@ const {
 } = process.env;
 
 const URL = `mongodb://${MONGODB_ID}:${MONGODB_PASSWORD}@${MONGODB_SERVER}/admin`;
-console.log(URL);
 
 mongoose.connection.on("error", (e: Error) => {
-  console.error(`Error : ${e.message}`);
+  logger.error(`Error : ${e.message}`);
 });
 
 const connect = async () => {
@@ -24,10 +24,10 @@ const connect = async () => {
       dbName: MONGODB_DB_NAME,
     })
     .then(() => {
-      console.log("MongoDB Connected");
+      logger.info("MongoDB Connected");
     })
     .catch((e: Error) => {
-      console.error(`Error : ${e.message}`);
+      logger.error(`Error : ${e.message}`);
       process.exit(1);
     });
 };

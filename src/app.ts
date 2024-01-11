@@ -9,6 +9,13 @@ import todoRoutes from "./routes/todoRoutes";
 
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swaggerSpec";
+import dotenv from "dotenv";
+
+const envFile =
+  process.env.NODE_ENV === "production"
+    ? ".env.production"
+    : ".env.development";
+dotenv.config({ path: envFile });
 
 const app = express();
 
