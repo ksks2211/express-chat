@@ -34,6 +34,8 @@ export const initSocketServer = (server: Server) => {
         .to(roomName)
         .emit("RoomMessage", `${socket.id} has joined ${roomName}`);
     });
+
+    socket.on("createRoom", (roomName: string) => {});
   });
 
   return io;

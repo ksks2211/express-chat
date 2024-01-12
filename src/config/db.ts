@@ -9,7 +9,7 @@ const {
   MONGODB_DB_NAME,
 } = process.env;
 
-const URL = `mongodb://${MONGODB_ID}:${MONGODB_PASSWORD}@${MONGODB_SERVER}/admin`;
+const URL = `mongodb://${MONGODB_ID}:${MONGODB_PASSWORD}@${MONGODB_SERVER}`;
 
 mongoose.connection.on("error", (e: Error) => {
   logger.error(`Error : ${e.message}`);
