@@ -4,7 +4,7 @@ import logger from "./logger";
 import { morganLogger } from "./middleware/morganLogger";
 import { userPreferencesMiddleware } from "./middleware/userPreferencesMiddleware";
 import cookieParser from "cookie-parser";
-import { CustomRequest } from "./types/request";
+import { LoginBody, RequestWithBody } from "./types/request.types";
 import todoRoutes from "./routes/todoRoutes";
 
 import swaggerUi from "swagger-ui-express";
@@ -51,7 +51,7 @@ app.get("/preference", (req, res) => {
   }
 });
 
-app.post("/login", (req: CustomRequest, res: Response) => {
+app.post("/login", (req: RequestWithBody<LoginBody>, res: Response) => {
   const { username, password } = req.body;
 
   // Custom validation logic

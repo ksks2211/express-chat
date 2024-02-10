@@ -1,8 +1,8 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 import moment from "moment";
-import { Todo } from "../types/todo.types";
+import type { ITodo } from "../types/todo.types";
 // Interface representing a document in MongoDB.
-export interface TodoDocument extends Document, Todo {}
+export interface TodoDocument extends Document, ITodo {}
 
 interface TodoModel extends Model<TodoDocument> {
   toggleCompletedById: (id: string) => Promise<boolean>;

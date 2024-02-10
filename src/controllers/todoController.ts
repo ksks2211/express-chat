@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { TodoDocument } from "../models/todo";
 import { Error } from "mongoose";
 import todoService from "../services/todoService";
-import { TodoCreateRequest } from "../types/request";
+import { RequestWithBody, TodoCreateBody } from "../types/request.types";
 
 export const getAllTodos = async (req: Request, res: Response) => {
   await todoService
@@ -26,7 +26,10 @@ export const getTodo = async (req: Request, res: Response) => {
   }
 };
 
-export const createTodo = async (req: TodoCreateRequest, res: Response) => {
+export const createTodo = async (
+  req: RequestWithBody<TodoCreateBody>,
+  res: Response
+) => {
   // Joi  or express-validator
   const { title, description } = req.body;
   try {

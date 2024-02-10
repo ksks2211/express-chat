@@ -1,8 +1,7 @@
-import { Mode } from "fs";
-import { ChatRoom } from "../types/chat.types";
+import type { IChatRoom } from "../types/chat.types";
 import mongoose, { Document, Model, Schema } from "mongoose";
 
-export interface ChatRoomDocument extends Document, ChatRoom {}
+export interface ChatRoomDocument extends Document, IChatRoom {}
 
 interface ChatRoomModel extends Model<ChatRoomDocument> {}
 
@@ -12,4 +11,17 @@ const ChatRoomSchema: Schema = new Schema({
   participants: [{ type: String, required: true }],
 });
 
-export default mongoose.model<ChatRoomDocument>("ChatRoom", ChatRoomSchema);
+ChatRoomSchema.set("toJSON", {
+  getters: true,
+  virtuals: true,
+  versionKey: false,
+  transform(doc, ret, options) {
+    delete ret._id;
+    return ret;
+  },
+});
+
+export default mongoose.model<ChatRoomDocument, ChatRoomModel>(
+  "ChatRoom",
+  ChatRoomSchema
+);
